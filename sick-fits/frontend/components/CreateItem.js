@@ -3,10 +3,13 @@ import { Mutation } from "react-apollo";
 import Form from "./styles/Form";
 import formatMoney from "../lib/formatMoney";
 import gql from "graphql-tag";
-import Error from './ErrorMessage';
-import Router from 'next/router';
+import Error from "./ErrorMessage";
+import Router from "next/router";
 
 const CREATE_ITEM_MUTATION = gql`
+  # The function takes a bunch of args
+  # available in createItem when prefixed with $
+  # cannot use _
   mutation CREATE_ITEM_MUTATION(
     $title: String!
     $description: String!
@@ -41,26 +44,67 @@ class CreateItem extends Component {
     this.setState({ [name]: val });
   };
 
+  uploadFile = async e => {
+    console.log("uploading file...");
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "sickfits");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/evinck/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const file = await res.json();
+    console.log(file);
+
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url
+    });
+  };
   render() {
     return (
+      // Mutation component is used to send the data to the GraphQL server
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(mutationFunction, { loading, error }) => (
           <Form
             onSubmit={async e => {
               // Stop the form from submitting
               e.preventDefault();
-              // call the mutation
               const createItem = mutationFunction;
+              // call the mutation
               const res = await createItem();
-              // Change them to the single item page
+              // Send the user to the single item page
               console.log(res);
-              Router.push({ pathname: '/item', query: {
-                id: res.data.createItem.id
-              }})
+              Router.push({
+                pathname: "/item",
+                query: {
+                  id: res.data.createItem.id
+                }
+              });
             }}
           >
+            <h2>Sell an item.</h2>
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="file">
+                Image
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="Upload an image"
+                  required
+                  onChange={this.uploadFile}
+                />
+                {this.state.image && (
+                  <img src={this.state.image} alt="Upload preview" />
+                )}
+              </label>
               <label htmlFor="title">
                 Title
                 <input
@@ -99,7 +143,6 @@ class CreateItem extends Component {
               </label>
               <button type="submit">Submit</button>
             </fieldset>
-            <h2>Sell an item.</h2>
           </Form>
         )}
       </Mutation>
