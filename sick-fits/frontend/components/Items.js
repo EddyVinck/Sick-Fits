@@ -35,10 +35,11 @@ class Items extends Component {
       <Center>
         <p>Items</p>
         <Query query={ALL_ITEMS_QUERY}>
+          {/* The payload */}
           {({ data, error, loading }) => {
             console.log(data, error);
             if (loading) return <p>loading...</p>;
-            if (error) return <p>error...</p>;
+            if (error) return <p>Error: {error.message}</p>;
             return (
               <ItemsList>
                 {data.items.map(item => (
