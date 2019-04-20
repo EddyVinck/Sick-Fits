@@ -4,12 +4,15 @@ import Page from "../components/Page";
 import withData from "../lib/withData";
 
 class MyApp extends App {
+  // getInitialProps is a Next lifecycle method
+  // This will run before the first render happens
+  // There are a lot of code examples for Next and Apollo like this
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    // this exposes the query to the user
+    // this exposes the query to the user via props
     pageProps.query = ctx.query;
     return { pageProps };
   }
