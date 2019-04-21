@@ -1,4 +1,7 @@
 # import * from './generated/prisma.graphql'
+#
+# This only imports things such as Item when
+# Item is used and was not defined in this file.
 
 type Mutation {
   createItem(
@@ -8,8 +11,12 @@ type Mutation {
     image: String
     largeImage: String
   ): Item!
+  updateItem(id: ID!, title: String, description: String, price: Int): Item!
 }
 
 type Query {
   items: [Item]!
+  # This could probably also be (id: Id!)
+  # but we are mirroring the prisma.graphql file
+  item(where: ItemWhereUniqueInput!): Item
 }
