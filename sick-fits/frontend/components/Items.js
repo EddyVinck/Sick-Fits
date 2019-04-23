@@ -37,7 +37,6 @@ class Items extends Component {
         <Query query={ALL_ITEMS_QUERY}>
           {/* The payload */}
           {({ data, error, loading }) => {
-            console.log(data, error);
             if (loading) return <p>loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             return (
