@@ -26,6 +26,33 @@ const Mutations = {
       },
       info // this is how the update function knows what to return
     );
+  },
+  async deleteItem(parent, args, context, info) {
+    const where = { id: args.id };
+
+    // 1. find the item
+    const item = await context.db.query.item(
+      { where },
+      /* This query is 'info' and requests that these fields come back.
+      Sometimes you need a second intermediary query, so the info parameter cannot be used here. 
+      We are going to manually pass a query here. Raw GraphQL */
+      `
+      {
+        id
+        title
+      }
+    `
+    );
+    // 2. Check if they own that item, or have the permissions
+    // TODO
+
+    // 3. Delete it!
+    return context.db.mutation.deleteItem(
+      {
+        where
+      },
+      info
+    );
   }
 };
 
