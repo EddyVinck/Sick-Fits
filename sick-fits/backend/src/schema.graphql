@@ -28,4 +28,6 @@ type Query {
   # but we are mirroring the prisma.graphql file
   item(where: ItemWhereUniqueInput!): Item
   itemsConnection(where: ItemWhereInput): ItemConnection!
+
+  me: User
 }
