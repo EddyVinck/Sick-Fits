@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const Mutations = {
   async createItem(parent, args, context, info) {
     // TODO: Check if they are logged in
@@ -24,7 +26,7 @@ const Mutations = {
           id: args.id
         }
       },
-      info // this is how the update function knows what to return
+      info // this is how the update function knows what to return to the client
     );
   },
   async deleteItem(parent, args, context, info) {
@@ -53,6 +55,34 @@ const Mutations = {
       },
       info
     );
+  },
+  async signup(parent, args, context, info) {
+    args.email = args.email.toLowerCase();
+
+    // Hash their password
+    const password = await bcrypt.hash(args.password, 10);
+
+    // Create the user in the database
+    const user = await context.db.mutation.createUser(
+      {
+        data: {
+          ...args,
+          password,
+          permissions: { set: ["USER"] } // Because permissions is reaching out to an externam enum, you have to set it like this with an array with the default permissions
+        }
+      },
+      info
+    );
+    // Create the JWT token for them
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // set the jwt as a cookie on the response
+    context.response.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+    });
+
+    // Finally, return the user to the browser
+    return user;
   }
 };
 
