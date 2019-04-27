@@ -16,7 +16,12 @@ type Mutation {
 }
 
 type Query {
-  items: [Item]!
+  items(
+    where: ItemWhereInput
+    orderBy: ItemOrderByInput
+    skip: Int
+    first: Int
+  ): [Item]!
 
   # This could probably also be (id: Id!)
   # but we are mirroring the prisma.graphql file
