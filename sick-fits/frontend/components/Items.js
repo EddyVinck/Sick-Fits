@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Item from "./Item";
+import Pagination from "./Pagination";
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY {
@@ -31,9 +32,11 @@ const ItemsList = styled.div`
 
 class Items extends Component {
   render() {
+    const page = this.props.page;
     return (
       <Center>
         <p>Items</p>
+        <Pagination page={page} />
         <Query query={ALL_ITEMS_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <p>loading...</p>;
@@ -47,6 +50,7 @@ class Items extends Component {
             );
           }}
         </Query>
+        <Pagination page={page} />
       </Center>
     );
   }

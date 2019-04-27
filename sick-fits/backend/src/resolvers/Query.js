@@ -7,7 +7,8 @@ const Query = {
   // }
   // the code above can be replaced with a prisma-binding if you just want to fetch data without any authentication
   items: forwardTo("db"),
-  item: forwardTo("db")
+  item: forwardTo("db"),
+  itemsConnection: forwardTo("db")
 };
 
 module.exports = Query;
