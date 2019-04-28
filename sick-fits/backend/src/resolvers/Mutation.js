@@ -106,6 +106,12 @@ const Mutations = {
     });
     // 5. Return the user
     return user;
+  },
+  signout(parent, args, context, info) {
+    context.response.clearCookie("token"); // clearCookie method is provided by middleware
+    return {
+      message: "User successfully signed out!"
+    };
   }
 };
 
