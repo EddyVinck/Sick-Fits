@@ -1,5 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { randomBytes } = require("crypto");
+const { promisify } = require("util");
+
 const Mutations = {
   async createItem(parent, args, context, info) {
     // TODO: Check if they are logged in
@@ -112,6 +115,71 @@ const Mutations = {
     return {
       message: "User successfully signed out!"
     };
+  },
+  async requestReset(parent, args, context, info) {
+    // 1. Check if this is a real user
+    const user = await context.db.query.user({ where: { email: args.email } });
+    if (!user) {
+      throw new Error(`No such user found for email ${email}`);
+    }
+
+    // 2. Set a reset token and expiry on that user
+    const randomBytesPromisified = promisify(randomBytes);
+    const resetToken = (await randomBytesPromisified(20)).toString("hex");
+    const oneHour = 3600000;
+    const resetTokenExpiry = Date.now() + oneHour;
+    const res = await context.db.mutation.updateUser({
+      where: { email: args.email },
+      data: { resetToken, resetTokenExpiry }
+    });
+    console.log(res);
+    // 3. Email them that reset token
+
+    return {
+      message: "Requested reset link."
+    };
+  },
+  async resetPassword(parent, args, context, info) {
+    // 1. Check if the passwords match
+    if (args.password !== args.confirmPassword) {
+      throw new Error(`Incorrect password provided`);
+    }
+
+    // 2. Check if it is a legit reset token
+    // 3. Check if it is expired
+    const oneHour = 3600000;
+    const [user] = await context.db.query.users({
+      where: {
+        resetToken: args.resetToken,
+        resetTokenExpiry_gte: Date.now() - oneHour // _gte means greater then or equal to
+      }
+    });
+    if (!user) {
+      throw new Error(
+        `The token is invalid or expired. Try requesting a new password reset link.`
+      );
+    }
+    // 4. Hash their new password
+    const password = await bcrypt.hash(args.password, 10);
+
+    // 5. Save the new password to the user
+    // 6. Remove old reset token fields
+    const updatedUser = await context.db.mutation.updateUser({
+      where: { email: user.email },
+      data: { password, resetToken: null, resetTokenExpiry: null }
+    });
+
+    // 7. Generate JWT
+    const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
+
+    // 8. Set the JWT cookie
+    context.response.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365
+    });
+
+    // 9. Return the new user
+    return updatedUser;
   }
 };
 
