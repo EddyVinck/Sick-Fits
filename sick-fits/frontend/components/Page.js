@@ -60,7 +60,6 @@ export default class Page extends Component {
         <StyledPage>
           <Meta />
           <Header />
-          <p> Hey page component</p>
           <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>
