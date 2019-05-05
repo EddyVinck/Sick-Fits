@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { randomBytes } = require("crypto");
 const { promisify } = require("util");
 const { transport, makeNiceEmail } = require("../mail");
+const { hasPermission } = require("../utils");
 
 const Mutations = {
   async createItem(parent, args, context, info) {
@@ -46,9 +47,14 @@ const Mutations = {
     );
   },
   async deleteItem(parent, args, context, info) {
+    // 1. Check if they are logged in
+    if (!context.request.userId) {
+      throw new Error(`You need to be logged in to do this.`);
+    }
+
     const where = { id: args.id };
 
-    // 1. find the item
+    // 2. find the item
     const item = await context.db.query.item(
       { where },
       /* This query is 'info' and requests that these fields come back.
@@ -58,13 +64,23 @@ const Mutations = {
       {
         id
         title
+        user {
+          id
+        }
       }
     `
     );
-    // 2. Check if they own that item, or have the permissions
-    // TODO
 
-    // 3. Delete it!
+    // 3. Check if they own that item, or have the permissions
+    const isItemOwner = item.user.id === context.request.userId;
+    const hasPermissions = context.request.user.permissions.some(permission =>
+      ["ADMIN", "ITEMDELETE"].includes(permission)
+    );
+    if ((isItemOwner || hasPermissions) === false) {
+      throw new Error(`You can't delete this item.`);
+    }
+
+    // 4. Delete it!
     return context.db.mutation.deleteItem(
       {
         where
@@ -208,6 +224,36 @@ const Mutations = {
 
     // 9. Return the new user
     return updatedUser;
+  },
+  async updatePermissions(parent, args, context, info) {
+    // 1. Check if they are logged in
+    if (!context.request.userId) {
+      throw new Error(`You need to be logged in to do this.`);
+    }
+
+    // 2. Query the current user
+    const currentUser = await context.db.query.user(
+      { where: { id: context.request.userId } },
+      info
+    );
+
+    // 3. Check if they have the permissions to do this
+    hasPermission(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
+
+    // 4. Update the permissions
+    return context.db.mutation.updateUser(
+      {
+        data: {
+          permissions: {
+            set: args.permissions // normally you can just pass to permissions directly, but because permissions is its own enum in graphql we need to use this `set` syntax from Prisma
+          }
+        },
+        where: {
+          id: args.userId // not the userId from context, so we can update other users too.
+        }
+      },
+      info
+    );
   }
 };
 
