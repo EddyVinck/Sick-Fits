@@ -254,6 +254,48 @@ const Mutations = {
       },
       info
     );
+  },
+  async addToCart(parent, args, context, info) {
+    // 1. Make sure they are signed in
+    const { userId } = context.request;
+    if (!userId) {
+      throw new Error(`You must be signed in to do this!`);
+    }
+    // 2. Query the users current cart
+    // Using cartItems because cartItems allows us to query for a combination of userId & itemId, as opposed to cartItem (singular) which takes a CartItem ID which we don't know
+    // If there is a match we can destructure the first item safely because there is never going to be multiple of the same CartItem for a user and an item. There will be only one, ever.
+    const [existingCartItem] = await context.db.query.cartItems({
+      where: {
+        user: { id: userId },
+        item: { id: args.id }
+      }
+    });
+    // 3. Check if the item is already in their cart
+    if (existingCartItem) {
+      // 3a. increment their current cart if it is
+      return await context.db.mutation.updateCartItem(
+        {
+          where: { id: existingCartItem.id },
+          data: { quantity: existingCartItem.quantity + 1 }
+        },
+        info
+      );
+    }
+    // 4. If it's not, create a fresh CartItem for that user
+    return await context.db.mutation.createCartItem(
+      {
+        data: {
+          user: {
+            // We need to use this connect syntax for a relationship
+            connect: { id: userId }
+          },
+          item: {
+            connect: { id: args.id }
+          }
+        }
+      },
+      info
+    );
   }
 };
 

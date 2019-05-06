@@ -26,7 +26,6 @@ class Signin extends Component {
     return (
       <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state}>
         {(reset, { error, loading, called }) => {
-          console.log(reset);
           return (
             <Form
               method="post"

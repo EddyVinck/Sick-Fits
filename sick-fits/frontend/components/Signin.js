@@ -35,7 +35,6 @@ class Signin extends Component {
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
         {(signup, { error, loading }) => {
-          console.log(signup);
           return (
             <Form
               method="post"

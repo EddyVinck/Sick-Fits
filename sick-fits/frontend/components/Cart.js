@@ -22,11 +22,9 @@ const Cart = props => {
   return (
     <Mutation mutation={TOGGLE_CART_MUTATION}>
       {toggleCart => {
-        console.log();
         return (
           <Query query={LOCAL_STATE_QUERY}>
             {({ data }) => {
-              console.log({ data });
               return (
                 <CartStyles open={data.cartOpen}>
                   <header>

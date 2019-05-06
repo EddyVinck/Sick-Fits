@@ -3,6 +3,8 @@
 # This only imports things such as Item when
 # Item is used and was not defined in this file.
 
+# Everything in this file is made available on the client and the server
+
 type SuccessMessage {
   message: String
 }
@@ -14,6 +16,7 @@ type User {
   permissions: [Permission!]!
   createdAt: DateTime!
   updatedAt: DateTime!
+  cart: [CartItem!]!
 }
 
 type Mutation {
@@ -36,6 +39,7 @@ type Mutation {
     confirmPassword: String!
   ): User!
   updatePermissions(permissions: [Permission], userId: ID!): User
+  addToCart(id: ID!): CartItem
 }
 
 type Query {
