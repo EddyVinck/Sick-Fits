@@ -5,6 +5,7 @@ import CartStyles from "./styles/CartStyles";
 import Supreme from "./styles/Supreme";
 import CloseButton from "./styles/CloseButton";
 import SickButton from "./styles/SickButton";
+import User from "./User";
 
 const LOCAL_STATE_QUERY = gql`
   query LOCAL_STATE_QUERY {
@@ -20,31 +21,53 @@ const TOGGLE_CART_MUTATION = gql`
 
 const Cart = props => {
   return (
-    <Mutation mutation={TOGGLE_CART_MUTATION}>
-      {toggleCart => {
+    <User>
+      {({ data: { me: currentUser } }) => {
+        if (!currentUser) return null;
+        console.log(currentUser);
+        // Check if it needs to be Eddy's cart or Wes' cart
+        const userNameSuffix =
+          currentUser.name[currentUser.name.length - 1] === "s" ? "'" : "'s";
         return (
-          <Query query={LOCAL_STATE_QUERY}>
-            {({ data }) => {
+          <Mutation mutation={TOGGLE_CART_MUTATION}>
+            {toggleCart => {
               return (
-                <CartStyles open={data.cartOpen}>
-                  <header>
-                    <CloseButton onClick={toggleCart} title="close">
-                      &times;
-                    </CloseButton>
-                    <Supreme>Your Cart</Supreme>
-                    <p>You have __ items in your cart.</p>
-                  </header>
-                  <footer>
-                    <p>$11.11</p>
-                    <SickButton>Checkout</SickButton>
-                  </footer>
-                </CartStyles>
+                <Query query={LOCAL_STATE_QUERY}>
+                  {({ data }) => {
+                    return (
+                      <CartStyles open={data.cartOpen}>
+                        <header>
+                          <CloseButton onClick={toggleCart} title="close">
+                            &times;
+                          </CloseButton>
+                          <Supreme>
+                            {currentUser.name + userNameSuffix} Cart
+                          </Supreme>
+                          <p>
+                            You have {currentUser.cart.length} item
+                            {currentUser.cart.length === 1 ? "" : "s"} in your
+                            cart.
+                          </p>
+                        </header>
+                        <ul>
+                          {currentUser.cart.map(cartItem => (
+                            <li key={cartItem.id}>{cartItem.id}</li>
+                          ))}
+                        </ul>
+                        <footer>
+                          <p>$11.11</p>
+                          <SickButton>Checkout</SickButton>
+                        </footer>
+                      </CartStyles>
+                    );
+                  }}
+                </Query>
               );
             }}
-          </Query>
+          </Mutation>
         );
       }}
-    </Mutation>
+    </User>
   );
 };
 
