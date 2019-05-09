@@ -6,6 +6,9 @@ import Supreme from "./styles/Supreme";
 import CloseButton from "./styles/CloseButton";
 import SickButton from "./styles/SickButton";
 import User from "./User";
+import CartItem from "./CartItem";
+import calcTotalPrice from "../lib/calcTotalPrice";
+import formatMoney from "../lib/formatMoney";
 
 const LOCAL_STATE_QUERY = gql`
   query LOCAL_STATE_QUERY {
@@ -51,11 +54,11 @@ const Cart = props => {
                         </header>
                         <ul>
                           {currentUser.cart.map(cartItem => (
-                            <li key={cartItem.id}>{cartItem.id}</li>
+                            <CartItem key={cartItem.id} cartItem={cartItem} />
                           ))}
                         </ul>
                         <footer>
-                          <p>$11.11</p>
+                          <p>{formatMoney(calcTotalPrice(currentUser.cart))}</p>
                           <SickButton>Checkout</SickButton>
                         </footer>
                       </CartStyles>
