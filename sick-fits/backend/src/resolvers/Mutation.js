@@ -313,7 +313,7 @@ const Mutations = {
       throw new Error(`You can't remove this cart item.`);
     }
     // 3. Delete that cart item
-    return await context.db.mutation.deleteCartItem(
+    return context.db.mutation.deleteCartItem(
       {
         where: { id: args.id }
       },
