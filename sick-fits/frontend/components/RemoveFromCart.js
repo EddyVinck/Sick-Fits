@@ -30,10 +30,8 @@ class RemoveFromCart extends Component {
   };
   // This gets called as soon as we get a response back from the server after a mutation has been performed
   update = (cache, payload) => {
-    console.log("delete item update");
     // read the cache
     const data = cache.readQuery({ query: CURRENT_USER_QUERY });
-    console.log({ data, payload });
     // remove the item from the cache
     const cartItemId = payload.data.removeFromCart.id;
     // me === currentUser
