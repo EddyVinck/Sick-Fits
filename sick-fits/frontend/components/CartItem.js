@@ -11,21 +11,38 @@ const CartItemStyles = styled.li`
   align-items: center;
   grid-template-columns: auto 1fr auto;
 
-  img {
-    margin-right: 10px;
-  }
   h3,
   p {
     margin: 0;
   }
 `;
 
+const ImagePlaceHolder = styled.div`
+  width: 100px;
+  margin-right: 10px;
+
+  img {
+    max-width: 100%;
+  }
+`;
+
 export default function CartItem({ cartItem }) {
+  // First check if that item exists (could have been deleted)
+  if (!cartItem.item)
+    return (
+      <CartItemStyles>
+        <ImagePlaceHolder />
+        <p>This item has been removed.</p>
+        <RemoveFromCart id={cartItem.id} />
+      </CartItemStyles>
+    );
   const { id, title, description, image, price } = cartItem.item;
   const { quantity } = cartItem;
   return (
     <CartItemStyles>
-      <img src={image} width="100" alt={title} />
+      <ImagePlaceHolder>
+        <img src={image} alt={title} />
+      </ImagePlaceHolder>
       <div className="cart-item-details">
         <h3>{title}</h3>
         <p>
