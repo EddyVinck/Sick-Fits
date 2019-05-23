@@ -29,10 +29,10 @@ type Item {
   price: Int!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  user: User!
+  user: User! # Who created this item
 }
 
-# Basically an intersection table, but as a typell
+# Basically an intersection table, but as a type
 type CartItem {
   id: ID! @id
   quantity: Int! @default(value: 1)
@@ -57,4 +57,6 @@ type Order {
   total: Int!
   user: User!
   charge: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

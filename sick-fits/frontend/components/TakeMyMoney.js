@@ -33,7 +33,6 @@ class TakeMyMoney extends Component {
   onToken = async (res, createOrder) => {
     NProgess.start();
     const stripeToken = res.id; // Send this to the server
-    console.log(stripeToken);
 
     // Manually call the mutation once we have the stripe token
     const order = await createOrder({
@@ -52,7 +51,6 @@ class TakeMyMoney extends Component {
     return (
       <User>
         {({ data: { me } }) => {
-          console.log({ me });
           return (
             <Mutation
               mutation={CREATE_ORDER_MUTATION}

@@ -332,19 +332,22 @@ const Mutations = {
         where: { id: userId }
       },
       `{ 
-      id name email 
-      cart { 
         id 
-        quantity 
-        item { 
-          title 
-          price 
+        name 
+        email 
+        cart { 
           id 
-          description
-          image 
+          quantity 
+          item { 
+            title 
+            price 
+            id 
+            description
+            image
+            largeImage 
+          } 
         } 
-      } 
-    }`
+      }`
     );
     // 2. Recalculate the total for the price
     const amount = user.cart.reduce(
@@ -362,10 +365,54 @@ const Mutations = {
     });
 
     // 4. Convert the CartItems to OrderItems
+    const orderItems = user.cart.map(cartItem => {
+      const orderItem = {
+        /*
+        title: String!
+        description: String!
+        image: String!
+        largeImage: String!
+        price: Int!
+        quantity: Int! @default(value: 1)
+        user: User
+       */
+        ...cartItem.item,
+        quantity: cartItem.quantity,
+        user: {
+          connect: {
+            id: userId
+          }
+        }
+      };
+      delete orderItem.id;
+      return orderItem;
+    });
 
     // 5. Create the Order
+    const order = await context.db.mutation
+      .createOrder({
+        data: {
+          total: charge.amount,
+          charge: charge.id,
+          items: {
+            create: orderItems // This creates the orderItems and the order in _one_ request
+          },
+          user: { connect: { id: userId } }
+        }
+      })
+      .catch(e => {
+        throw new Error(`Processing this order has failed.`);
+      });
     // 6. Clean up - clear user's cart, delete CartItems
+    const cartItemIds = user.cart.map(cartItem => cartItem.id);
+    await context.db.mutation.deleteManyCartItems({
+      where: {
+        id_in: cartItemIds
+      }
+    });
+
     // 7. Return the order to the client
+    return order;
   }
 };
 
