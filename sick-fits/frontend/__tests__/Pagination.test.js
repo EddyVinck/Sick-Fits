@@ -43,8 +43,8 @@ describe("<Pagination />", () => {
     expect(wrapper.find("p").text()).toMatch(/loading/i);
     // console.log(wrapper.debug());
     const pagination = wrapper.find('div[data-test="pagination"]');
-    console.log(pagination.debug());
-    // expect(toJSON(pagination)).toMatchSnapshot();
+    // console.log(pagination.debug());
+    expect(toJSON(pagination)).toMatchSnapshot();
     // continue at 4:45
   });
 
@@ -58,7 +58,7 @@ describe("<Pagination />", () => {
     wrapper.update();
     // console.log(wrapper.debug());
     const pagination = wrapper.find('div[data-test="pagination"]');
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     const itemsPerPage = 4;
     expect(wrapper.find(".totalPages").text()).toEqual(
       `${Math.ceil(18 / itemsPerPage)}`
@@ -74,14 +74,9 @@ describe("<Pagination />", () => {
     );
     await wait();
     wrapper.update();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     expect(wrapper.find("a.prev").prop("aria-disabled")).toEqual(true);
     expect(wrapper.find("a.next").prop("aria-disabled")).toEqual(false);
-    // console.log(wrapper.debug());
-    // const pagination = wrapper.find('div[data-test="pagination"]');
-    // console.log(wrapper.debug());
-    // expect(wrapper.find(".totalPages").text()).toEqual(`${Math.ceil(18 / 4)}`);
-    // expect(toJSON(pagination)).toMatchSnapshot();
   });
 
   it("disables next button on the last page", async () => {
@@ -93,7 +88,7 @@ describe("<Pagination />", () => {
     );
     await wait();
     wrapper.update();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     expect(wrapper.find("a.prev").prop("aria-disabled")).toEqual(false);
     expect(wrapper.find("a.next").prop("aria-disabled")).toEqual(true);
   });
@@ -107,7 +102,7 @@ describe("<Pagination />", () => {
     );
     await wait();
     wrapper.update();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     expect(wrapper.find("a.prev").prop("aria-disabled")).toEqual(false);
     expect(wrapper.find("a.next").prop("aria-disabled")).toEqual(false);
   });

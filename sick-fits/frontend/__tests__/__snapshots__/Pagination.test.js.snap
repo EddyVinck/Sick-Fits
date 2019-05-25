@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Pagination /> displays a loading message 1`] = `null`;
+
 exports[`<Pagination /> renders pagination for 18 items 1`] = `
 <div
   className="PaginationStyles-aduuar-0 ewJsCc"
