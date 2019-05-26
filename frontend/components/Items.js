@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import Item from "./Item";
 import Pagination from "./Pagination";
+import ItemPaginationData from "./ItemPaginationData";
 import { perPage as itemsPerPage } from "../config";
 
 const ALL_ITEMS_QUERY = gql`
@@ -41,28 +42,40 @@ class Items extends Component {
     return (
       <div>
         <h1>All products</h1>
-        <Pagination page={page} />
-        <Query
-          query={ALL_ITEMS_QUERY}
-          // fetchPolicy="network-only" -> cache is unused
-          variables={{
-            skip: this.props.page * itemsPerPage - itemsPerPage,
-            first: itemsPerPage
-          }}
-        >
-          {({ data, error, loading }) => {
-            if (loading) return <p>loading...</p>;
-            if (error) return <p>Error: {error.message}</p>;
+        <ItemPaginationData page={page}>
+          {pagination => {
             return (
-              <ItemsList>
-                {data.items.map(item => (
-                  <Item item={item} key={item.id} />
-                ))}
-              </ItemsList>
+              <>
+                <p>
+                  {pagination.itemCount} products total | sorting by{" "}
+                  <strong>most recent</strong>
+                </p>
+                <Pagination {...pagination} />
+                <Query
+                  query={ALL_ITEMS_QUERY}
+                  // fetchPolicy="network-only" -> cache is unused
+                  variables={{
+                    skip: this.props.page * itemsPerPage - itemsPerPage,
+                    first: itemsPerPage
+                  }}
+                >
+                  {({ data, error, loading }) => {
+                    if (loading) return <p>loading...</p>;
+                    if (error) return <p>Error: {error.message}</p>;
+                    return (
+                      <ItemsList>
+                        {data.items.map(item => (
+                          <Item item={item} key={item.id} />
+                        ))}
+                      </ItemsList>
+                    );
+                  }}
+                </Query>
+                <Pagination {...pagination} />
+              </>
             );
           }}
-        </Query>
-        <Pagination page={page} />
+        </ItemPaginationData>
       </div>
     );
   }

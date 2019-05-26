@@ -4,7 +4,10 @@ import wait from "waait";
 import { MockedProvider } from "react-apollo/test-utils";
 import Router from "next/router";
 import { fakeUser, fakeCartItem } from "../lib/testUtils";
-import Pagination, { PAGINATION_QUERY } from "../components/Pagination";
+import ItemPaginationData, {
+  PAGINATION_QUERY
+} from "../components/ItemPaginationData";
+import Pagination from "../components/Pagination";
 import { perPage as itemsPerPage } from "../config";
 
 // push and prefetch only work in the front-end and this causes errors in the tests. Faking those methods to fix that.
@@ -38,7 +41,9 @@ describe("<Pagination />", () => {
   it("displays a loading message", () => {
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(1)}>
-        <Pagination page={1} />
+        <ItemPaginationData page={1}>
+          {data => <Pagination {...data} />}
+        </ItemPaginationData>
       </MockedProvider>
     );
     expect(wrapper.find("p").text()).toMatch(/loading/i);
@@ -46,13 +51,14 @@ describe("<Pagination />", () => {
     const pagination = wrapper.find('div[data-test="pagination"]');
     // console.log(pagination.debug());
     expect(toJSON(pagination)).toMatchSnapshot();
-    // continue at 4:45
   });
 
   it("renders pagination for 18 items", async () => {
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
-        <Pagination page={1} />
+        <ItemPaginationData page={1}>
+          {data => <Pagination {...data} />}
+        </ItemPaginationData>
       </MockedProvider>
     );
     await wait();
@@ -69,7 +75,9 @@ describe("<Pagination />", () => {
   it("disables prev button on the first page", async () => {
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
-        <Pagination page={1} />
+        <ItemPaginationData page={1}>
+          {data => <Pagination {...data} />}
+        </ItemPaginationData>
       </MockedProvider>
     );
     await wait();
@@ -82,7 +90,9 @@ describe("<Pagination />", () => {
   it("disables next button on the last page", async () => {
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
-        <Pagination page={Math.ceil(18 / itemsPerPage)} />
+        <ItemPaginationData page={Math.ceil(18 / itemsPerPage)}>
+          {data => <Pagination {...data} />}
+        </ItemPaginationData>
       </MockedProvider>
     );
     await wait();
@@ -95,7 +105,9 @@ describe("<Pagination />", () => {
   it("enables every button on a middle page", async () => {
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
-        <Pagination page={Math.ceil(18 / itemsPerPage / 2)} />
+        <ItemPaginationData page={Math.ceil(18 / itemsPerPage / 2)}>
+          {data => <Pagination {...data} />}
+        </ItemPaginationData>
       </MockedProvider>
     );
     await wait();
