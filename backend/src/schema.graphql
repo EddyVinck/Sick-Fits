@@ -17,7 +17,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   cart: [CartItem!]!
-  orders: [Order]!
+  orders: [Order]
 }
 
 type Mutation {
