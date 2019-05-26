@@ -19,24 +19,28 @@ const ALL_ITEMS_QUERY = gql`
   }
 `;
 
-const Center = styled.div`
-  text-align: center;
-`;
-
 const ItemsList = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 60px;
-  max-width: ${props => props.theme.maxWidth};
+  grid-template-columns: 1fr;
+  grid-gap: 18px;
   margin: 0 auto;
+
+  @media (min-width: ${props => props.theme.breakpoints.medium}) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: ${props => props.theme.breakpoints.large}) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 24px;
+    max-width: ${props => props.theme.maxWidth};
+  }
 `;
 
 class Items extends Component {
   render() {
     const page = this.props.page;
     return (
-      <Center>
-        <p>Items</p>
+      <div>
+        <h1>All products</h1>
         <Pagination page={page} />
         <Query
           query={ALL_ITEMS_QUERY}
@@ -59,7 +63,7 @@ class Items extends Component {
           }}
         </Query>
         <Pagination page={page} />
-      </Center>
+      </div>
     );
   }
 }

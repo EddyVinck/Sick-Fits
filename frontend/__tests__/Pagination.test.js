@@ -5,6 +5,7 @@ import { MockedProvider } from "react-apollo/test-utils";
 import Router from "next/router";
 import { fakeUser, fakeCartItem } from "../lib/testUtils";
 import Pagination, { PAGINATION_QUERY } from "../components/Pagination";
+import { perPage as itemsPerPage } from "../config";
 
 // push and prefetch only work in the front-end and this causes errors in the tests. Faking those methods to fix that.
 Router.router = {
@@ -59,7 +60,6 @@ describe("<Pagination />", () => {
     // console.log(wrapper.debug());
     const pagination = wrapper.find('div[data-test="pagination"]');
     // console.log(wrapper.debug());
-    const itemsPerPage = 4;
     expect(wrapper.find(".totalPages").text()).toEqual(
       `${Math.ceil(18 / itemsPerPage)}`
     );
@@ -80,7 +80,6 @@ describe("<Pagination />", () => {
   });
 
   it("disables next button on the last page", async () => {
-    const itemsPerPage = 4;
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
         <Pagination page={Math.ceil(18 / itemsPerPage)} />
@@ -94,7 +93,6 @@ describe("<Pagination />", () => {
   });
 
   it("enables every button on a middle page", async () => {
-    const itemsPerPage = 4;
     const wrapper = mount(
       <MockedProvider mocks={makeMocksFor(18)}>
         <Pagination page={Math.ceil(18 / itemsPerPage / 2)} />
