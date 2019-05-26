@@ -50,7 +50,8 @@ class TakeMyMoney extends Component {
   render() {
     return (
       <User>
-        {({ data: { me } }) => {
+        {({ data: { me }, loading }) => {
+          if (loading) return null;
           return (
             <Mutation
               mutation={CREATE_ORDER_MUTATION}
@@ -84,3 +85,4 @@ class TakeMyMoney extends Component {
 }
 
 export default TakeMyMoney;
+export { CREATE_ORDER_MUTATION };
