@@ -30,7 +30,7 @@ const SINGLE_ORDER_QUERY = gql`
   }
 `;
 
-export default class Order extends Component {
+class Order extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired
   };
@@ -41,10 +41,9 @@ export default class Order extends Component {
           //
           if (error) return <Error error={error} />;
           if (loading) return <p>Loading...</p>;
-          console.log(data);
           const order = data.order;
           return (
-            <OrderStyles>
+            <OrderStyles data-test="order">
               <Head>
                 <title>Sick Fits - Order {order.id}</title>
               </Head>
@@ -88,3 +87,6 @@ export default class Order extends Component {
     );
   }
 }
+
+export default Order;
+export { SINGLE_ORDER_QUERY };

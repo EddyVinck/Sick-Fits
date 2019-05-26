@@ -4,10 +4,8 @@ import toJSON from "enzyme-to-json";
 import { MockedProvider } from "react-apollo/test-utils";
 import { CURRENT_USER_QUERY } from "../components/User";
 import TakeMyMoney, { CREATE_ORDER_MUTATION } from "../components/TakeMyMoney";
-import { ApolloConsumer } from "react-apollo";
 import { fakeUser, fakeCartItem } from "../lib/testUtils";
 import NProgress from "nprogress";
-import Error from "../components/ErrorMessage";
 import Router from "next/router";
 
 Router.router = { push() {} };
