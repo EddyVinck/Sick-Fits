@@ -3,12 +3,27 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import Meta from "./Meta";
 
+const colors = {
+  green: "rgb(0, 55, 32)",
+  lightGreen: "rgb(128, 155, 144)",
+  darkGreen: "rgb(0, 44, 26)",
+  gray: "rgb(102, 111, 124)",
+  lightGray: "rgb(128, 139, 155)",
+  darkGray: "rgb(92, 100, 112)"
+};
+
 const theme = {
   red: "#FF0000",
   black: "#393939",
   grey: "#3A3A3A",
   lightgrey: "#E1E1E1",
   offWhite: "#EDEDED",
+  primary: colors.green,
+  primaryLight: colors.lightGreen,
+  primaryDark: colors.darkGreen,
+  secondary: colors.gray,
+  secondaryLight: colors.lightGray,
+  secondaryDark: colors.darkGray,
   maxWidth: "1000px",
   bs: "0 12px 24px 0 rgba(0, 0, 0, 0.09)",
   breakpoints: {
