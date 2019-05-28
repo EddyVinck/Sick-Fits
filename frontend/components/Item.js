@@ -17,26 +17,40 @@ export default class Item extends Component {
     const { item } = this.props;
     return (
       <ItemStyles>
-        {item.image && <img src={item.image} alt={item.title} />}
-        <Title>
+        <Link
+          href={{
+            pathname: "/item",
+            query: { id: item.id }
+          }}
+        >
+          <a>
+            {item.image && (
+              <div className="img-wrapper">
+                <img src={item.image} alt={item.title} />
+              </div>
+            )}
+          </a>
+        </Link>
+        <div className="item__details">
           <Link
             href={{
               pathname: "/item",
               query: { id: item.id }
             }}
           >
-            <a>{item.title}</a>
+            <a>
+              <Title>{item.title}</Title>
+              <p>{item.description}</p>
+              <span className="price">{formatMoney(item.price)}</span>
+            </a>
           </Link>
-        </Title>
-
-        <PriceTag>{formatMoney(item.price)}</PriceTag>
-        <p>{item.description}</p>
+        </div>
         <div className="buttonList">
-          <Link href={{ pathname: "update", query: { id: item.id } }}>
-            <a>Edit 🖋</a>
-          </Link>
           <AddToCart id={item.id} />
-          <DeleteItem id={item.id}>Delete item</DeleteItem>
+          <Link href={{ pathname: "update", query: { id: item.id } }}>
+            <a>Edit</a>
+          </Link>
+          <DeleteItem id={item.id}>Delete</DeleteItem>
         </div>
       </ItemStyles>
     );

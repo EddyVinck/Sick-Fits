@@ -2,11 +2,30 @@
 
 exports[`<Item/> renders and matches the snapshot 1`] = `
 <ItemStyles__Item>
-  <img
-    alt="A test item"
-    src="sunglasses.jpg"
-  />
-  <Title>
+  <Link
+    href={
+      Object {
+        "pathname": "/item",
+        "query": Object {
+          "id": "ABC123",
+        },
+      }
+    }
+  >
+    <a>
+      <div
+        className="img-wrapper"
+      >
+        <img
+          alt="A test item"
+          src="sunglasses.jpg"
+        />
+      </div>
+    </a>
+  </Link>
+  <div
+    className="item__details"
+  >
     <Link
       href={
         Object {
@@ -18,19 +37,26 @@ exports[`<Item/> renders and matches the snapshot 1`] = `
       }
     >
       <a>
-        A test item
+        <Title>
+          A test item
+        </Title>
+        <p>
+          This is a really nice item.
+        </p>
+        <span
+          className="price"
+        >
+          €50
+        </span>
       </a>
     </Link>
-  </Title>
-  <PriceTag>
-    €50
-  </PriceTag>
-  <p>
-    This is a really nice item.
-  </p>
+  </div>
   <div
     className="buttonList"
   >
+    <AddToCart
+      id="ABC123"
+    />
     <Link
       href={
         Object {
@@ -42,16 +68,13 @@ exports[`<Item/> renders and matches the snapshot 1`] = `
       }
     >
       <a>
-        Edit 🖋
+        Edit
       </a>
     </Link>
-    <AddToCart
-      id="ABC123"
-    />
     <DeleteItem
       id="ABC123"
     >
-      Delete item
+      Delete
     </DeleteItem>
   </div>
 </ItemStyles__Item>

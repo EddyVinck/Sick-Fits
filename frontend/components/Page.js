@@ -57,6 +57,9 @@ injectGlobal`
     line-height: 2;
     font-family: 'radnika_next';
   }
+  button {
+    font-family: 'radnika_next';
+  }
   a {
     color: ${theme.black};
     text-decoration: none;

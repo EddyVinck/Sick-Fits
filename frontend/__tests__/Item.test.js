@@ -14,11 +14,15 @@ const fakeItem = {
 describe("<Item/>", () => {
   it("renders pricetag and title properly", () => {
     const wrapper = shallow(<ItemComponent item={fakeItem} />);
-    const PriceTag = wrapper.find("PriceTag");
+    const PriceTag = wrapper.find(".price");
     expect(PriceTag.children().text()).toBe("€50");
-    // console.log(wrapper.debug());
 
-    expect(wrapper.find("Title a").text()).toBe(fakeItem.title);
+    expect(
+      wrapper
+        .find("Title")
+        .shallow() // shallow render the Title tag so the text can be accessed.
+        .text()
+    ).toBe(fakeItem.title);
   });
 
   it("renders the image properly", () => {
