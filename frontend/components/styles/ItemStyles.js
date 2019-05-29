@@ -126,8 +126,8 @@ const Item = styled.div`
           border-radius: 4px;
         }
 
-        > button:nth-child(1),
-        > a:nth-child(1) {
+        > button:nth-child(-n + 1),
+        > a:nth-child(-n + 1) {
           position: absolute;
           top: 50%;
           left: 50%;

@@ -34,16 +34,13 @@ exports[`<Pagination /> renders pagination for 18 items 1`] = `
     Page 
     1
      of
+     
     <span
       className="totalPages"
     >
       3
     </span>
-    pages.
-  </p>
-  <p>
-    18
-     Items Total
+     pages.
   </p>
   <Link
     href={

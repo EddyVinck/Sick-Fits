@@ -16,11 +16,9 @@ const Pagination = props => (
       </a>
     </Link>
     <p>
-      Page {props.currentPage} of
-      <span className="totalPages">{props.pagesCount}</span>
-      pages.
+      Page {props.currentPage} of{" "}
+      <span className="totalPages">{props.pagesCount}</span> pages.
     </p>
-    <p>{props.itemCount} Items Total</p>
     <Link prefetch href={props.nextPage}>
       <a className="next" aria-disabled={props.nextDisabled}>
         Next ➡

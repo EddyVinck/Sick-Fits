@@ -1,11 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const NavStyles = styled.ul`
+const NavStyles = styled.nav`
   margin: 0;
   padding: 0;
   display: flex;
   justify-self: end;
   font-size: 2rem;
+  width: 100%;
   a,
   button {
     padding: 1rem 3rem;
@@ -14,29 +15,19 @@ const NavStyles = styled.ul`
     position: relative;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 1em;
+    font-size: 1.4rem;
     background: none;
     border: 0;
+    color: #fff;
     cursor: pointer;
     @media (max-width: 700px) {
       font-size: 10px;
       padding: 0 10px;
     }
-    &:before {
-      content: '';
-      width: 2px;
-      background: ${props => props.theme.lightgrey};
-      height: 100%;
-      left: 0;
-      position: absolute;
-      transform: skew(-20deg);
-      top: 0;
-      bottom: 0;
-    }
     &:after {
       height: 2px;
-      background: red;
-      content: '';
+      background: ${props => props.theme.primaryLight};
+      content: "";
       width: 0;
       position: absolute;
       transform: translateX(-50%);
@@ -51,10 +42,16 @@ const NavStyles = styled.ul`
       &:after {
         width: calc(100% - 60px);
       }
-    @media (max-width: 700px) {
+      @media (max-width: 700px) {
         width: calc(100% - 10px);
+      }
     }
-    }
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.large}) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
   @media (max-width: 1300px) {
     border-top: 1px solid ${props => props.theme.lightgrey};

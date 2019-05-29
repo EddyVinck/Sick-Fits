@@ -77,7 +77,7 @@ const Inner = styled.div`
   padding: 2rem;
 `;
 
-export default class Page extends Component {
+class Page extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -90,3 +90,6 @@ export default class Page extends Component {
     );
   }
 }
+
+export default Page;
+export { theme };
