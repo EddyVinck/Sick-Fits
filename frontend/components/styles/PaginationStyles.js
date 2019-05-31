@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PaginationStyles = styled.div`
+  max-width: 100%;
   text-align: center;
   display: inline-grid;
   grid-template-columns: repeat(4, auto);
@@ -18,7 +19,7 @@ const PaginationStyles = styled.div`
       border-right: 0;
     }
   }
-  a[aria-disabled='true'] {
+  a[aria-disabled="true"] {
     color: grey;
     pointer-events: none;
   }

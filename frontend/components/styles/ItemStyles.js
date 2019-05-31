@@ -137,8 +137,8 @@ const Item = styled.div`
           font-weight: bold;
           white-space: pre;
           &:hover {
-            background-color: ${props => props.theme.primaryLight};
-            border-color: ${props => props.theme.primaryLight};
+            background-color: ${props => props.theme.secondaryLight};
+            border-color: ${props => props.theme.secondaryLight};
             color: white;
           }
         }

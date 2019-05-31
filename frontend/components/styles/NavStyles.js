@@ -4,6 +4,7 @@ const NavStyles = styled.nav`
   margin: 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-self: end;
   font-size: 2rem;
   width: 100%;

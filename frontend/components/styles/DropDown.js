@@ -35,12 +35,14 @@ const glow = keyframes`
 `;
 
 const SearchStyles = styled.div`
+  padding: 1rem 1rem;
+
   position: relative;
   line-height: 1;
   display: flex;
   align-items: center;
   input {
-    width: 17.5rem;
+    width: 10rem;
     padding: 10px;
     border: 0;
     font-size: 1.2rem;
@@ -52,6 +54,11 @@ const SearchStyles = styled.div`
     &:active,
     &:focus {
       width: 24rem;
+    }
+
+    @media (min-width: ${props => props.theme.breakpoints.medium}) {
+      padding: 1rem 3rem;
+      width: 17.5rem;
     }
   }
 `;
