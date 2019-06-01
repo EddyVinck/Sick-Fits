@@ -4,7 +4,7 @@ exports[`<Pagination /> displays a loading message 1`] = `null`;
 
 exports[`<Pagination /> renders pagination for 18 items 1`] = `
 <div
-  className="PaginationStyles-aduuar-0 ewJsCc"
+  className="PaginationStyles-aduuar-0 fCdUWy"
   data-test="pagination"
 >
   <SideEffect(Head)>

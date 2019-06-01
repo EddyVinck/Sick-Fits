@@ -2,7 +2,7 @@
 
 exports[`<Nav /> renders a minimal nav when signed out 1`] = `
 <nav
-  className="NavStyles-sc-11c0d2g-0 hoyqJE"
+  className="NavStyles-sc-11c0d2g-0 ieaEDb"
   data-test="nav"
 >
   <Nav__TopBar>
@@ -10,88 +10,146 @@ exports[`<Nav /> renders a minimal nav when signed out 1`] = `
       className="Nav__TopBar-sc-1h4lqeb-1 eBFvTI"
     >
       <div
-        className="Nav__TopBar-sc-1h4lqeb-1 eBFvTI Nav__BottomBar-sc-1h4lqeb-0 dFJmLJ"
+        className="Nav__TopBar-sc-1h4lqeb-1 eBFvTI Nav__BottomBar-sc-1h4lqeb-0 fYJRMm"
       >
-        <Link
-          href="/signup"
+        <div
+          className="bar-inner"
         >
-          <a
+          <Nav__LogoMobile>
+            <Nav__Logo
+              className="Nav__LogoMobile-sc-1h4lqeb-3 jqNIvc"
+            >
+              <h1
+                className="Nav__LogoMobile-sc-1h4lqeb-3 jqNIvc Nav__Logo-sc-1h4lqeb-2 clqaxC"
+              >
+                <Link
+                  href="/"
+                >
+                  <a
+                    href="/"
+                    onClick={[Function]}
+                  >
+                    Adamant
+                  </a>
+                </Link>
+              </h1>
+            </Nav__Logo>
+          </Nav__LogoMobile>
+          <Link
             href="/signup"
-            onClick={[Function]}
           >
-            Sign In
-          </a>
-        </Link>
+            <a
+              href="/signup"
+              onClick={[Function]}
+            >
+              Sign In
+            </a>
+          </Link>
+        </div>
       </div>
     </Nav__BottomBar>
   </Nav__TopBar>
   <Nav__BottomBar>
     <div
-      className="Nav__BottomBar-sc-1h4lqeb-0 dFJmLJ"
+      className="Nav__BottomBar-sc-1h4lqeb-0 fYJRMm"
     >
-      <Link
-        href="/items"
+      <div
+        className="bar-inner bar-space-between"
       >
-        <a
-          href="/items"
-          onClick={[Function]}
-        >
-          Shop
-        </a>
-      </Link>
-      <AutoComplete>
-        <DropDown__SearchStyles>
-          <div
-            className="DropDown__SearchStyles-n5d97g-2 yMPcx"
-          >
-            <Downshift
-              defaultHighlightedIndex={null}
-              defaultInputValue=""
-              defaultIsOpen={false}
-              defaultSelectedItem={null}
-              environment={[Window]}
-              getA11yStatusMessage={[Function]}
-              itemToString={[Function]}
-              onChange={[Function]}
-              onInputValueChange={[Function]}
-              onOuterClick={[Function]}
-              onSelect={[Function]}
-              onStateChange={[Function]}
-              onUserAction={[Function]}
-              scrollIntoView={[Function]}
-              selectedItemChanged={[Function]}
-              stateReducer={[Function]}
-              suppressRefError={false}
+        <div>
+          <Nav__LogoDesktop>
+            <Nav__Logo
+              className="Nav__LogoDesktop-sc-1h4lqeb-4 eFuTqq"
             >
-              <div
-                aria-expanded={false}
-                aria-haspopup="listbox"
-                aria-labelledby="downshift-0-label"
-                aria-owns={null}
-                role="combobox"
+              <h1
+                className="Nav__LogoDesktop-sc-1h4lqeb-4 eFuTqq Nav__Logo-sc-1h4lqeb-2 clqaxC"
               >
-                <ApolloConsumer>
-                  <input
-                    aria-activedescendant={null}
-                    aria-autocomplete="list"
-                    aria-controls={null}
+                <Link
+                  href="/"
+                >
+                  <a
+                    href="/"
+                    onClick={[Function]}
+                  >
+                    Adamant
+                  </a>
+                </Link>
+              </h1>
+            </Nav__Logo>
+          </Nav__LogoDesktop>
+        </div>
+        <div
+          className="right"
+        >
+          <Link
+            href="/items"
+          >
+            <a
+              className=""
+              href="/items"
+              onClick={[Function]}
+            >
+              Shop
+            </a>
+          </Link>
+          <AutoComplete
+            handleSearchUsage={[Function]}
+          >
+            <DropDown__SearchStyles>
+              <div
+                className="DropDown__SearchStyles-n5d97g-2 bkdoZn"
+              >
+                <Downshift
+                  defaultHighlightedIndex={null}
+                  defaultInputValue=""
+                  defaultIsOpen={false}
+                  defaultSelectedItem={null}
+                  environment={[Window]}
+                  getA11yStatusMessage={[Function]}
+                  itemToString={[Function]}
+                  onChange={[Function]}
+                  onInputValueChange={[Function]}
+                  onOuterClick={[Function]}
+                  onSelect={[Function]}
+                  onStateChange={[Function]}
+                  onUserAction={[Function]}
+                  scrollIntoView={[Function]}
+                  selectedItemChanged={[Function]}
+                  stateReducer={[Function]}
+                  suppressRefError={false}
+                >
+                  <div
+                    aria-expanded={false}
+                    aria-haspopup="listbox"
                     aria-labelledby="downshift-0-label"
-                    autoComplete="off"
-                    className=""
-                    id="search"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onKeyDown={[Function]}
-                    placeholder="Search for an item.."
-                    type="search"
-                    value=""
-                  />
-                </ApolloConsumer>
+                    aria-owns={null}
+                    role="combobox"
+                  >
+                    <ApolloConsumer>
+                      <input
+                        aria-activedescendant={null}
+                        aria-autocomplete="list"
+                        aria-controls={null}
+                        aria-labelledby="downshift-0-label"
+                        autoComplete="off"
+                        className=""
+                        id="search"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                        placeholder="Search for an item.."
+                        type="search"
+                        value=""
+                      />
+                    </ApolloConsumer>
+                  </div>
+                </Downshift>
               </div>
-            </Downshift>
-          </div>
-        </DropDown__SearchStyles>
-      </AutoComplete>
+            </DropDown__SearchStyles>
+          </AutoComplete>
+        </div>
+      </div>
     </div>
   </Nav__BottomBar>
 </nav>

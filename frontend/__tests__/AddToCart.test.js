@@ -68,7 +68,7 @@ describe("<AddToCart/>", () => {
       </MockedProvider>
     );
     await wait();
-    wrapper.update();
+    wrapper.update(5);
     const {
       data: { me }
     } = await apolloClient.query({ query: CURRENT_USER_QUERY });
