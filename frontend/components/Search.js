@@ -68,6 +68,10 @@ class AutoComplete extends Component {
         <Downshift
           itemToString={item => (item === null ? "" : item.title)}
           onChange={routeToItem}
+          onOuterClick={() => {
+            console.log("outer");
+            this.props.handleSearchUsage({ isUsed: false });
+          }}
         >
           {({
             getInputProps,
@@ -86,6 +90,12 @@ class AutoComplete extends Component {
                         placeholder: "Search for an item..",
                         id: "search",
                         className: this.state.loading ? "loading" : "",
+                        onClick: () => {
+                          this.props.handleSearchUsage({ isUsed: true });
+                        },
+                        onBlur: () => {
+                          this.props.handleSearchUsage({ isUsed: false });
+                        },
                         onChange: e => {
                           e.persist();
                           // Set loading here because otherwise it will show the 'no items found' message bofore the debounce is finished

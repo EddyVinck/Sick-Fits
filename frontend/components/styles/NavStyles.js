@@ -41,10 +41,7 @@ const NavStyles = styled.nav`
     &:focus {
       outline: none;
       &:after {
-        width: calc(100% - 60px);
-      }
-      @media (max-width: 700px) {
-        width: calc(100% - 10px);
+        width: calc(100% - 20px);
       }
     }
   }
@@ -53,6 +50,16 @@ const NavStyles = styled.nav`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+
+    a,
+    button {
+      &:hover,
+      &:focus {
+        &:after {
+          width: calc(100% - 60px);
+        }
+      }
+    }
   }
   @media (max-width: 1300px) {
     border-top: 1px solid ${props => props.theme.lightgrey};
