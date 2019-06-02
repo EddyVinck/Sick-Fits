@@ -37,7 +37,6 @@ describe("<Order />", () => {
     expect(wrapper.find("p").text()).toMatch(/loading/i);
     await wait();
     wrapper.update();
-    console.log(wrapper.debug());
     expect(wrapper.find("div[data-test='order']").exists()).toBe(true);
     expect(toJSON(wrapper.find("div[data-test='order']"))).toMatchSnapshot();
   });

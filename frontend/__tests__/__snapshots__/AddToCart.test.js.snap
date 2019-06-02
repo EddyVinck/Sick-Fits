@@ -2,6 +2,7 @@
 
 exports[`<AddToCart/> renders and matches the snapshot 1`] = `
 <button
+  className=""
   disabled={false}
   onClick={[Function]}
 >

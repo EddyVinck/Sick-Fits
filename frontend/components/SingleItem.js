@@ -4,6 +4,12 @@ import gql from "graphql-tag";
 import Head from "next/head";
 import Error from "./ErrorMessage";
 import styled from "styled-components";
+import AddToCart from "./AddToCart";
+import { sharedButtonStyles } from "./styles/Button";
+
+const StyledAddToCart = styled(AddToCart)`
+  ${sharedButtonStyles}
+`;
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
@@ -60,6 +66,7 @@ class SingleItem extends Component {
               <div className="details">
                 <h2>Viewing {item.title}</h2>
                 <p>{item.description}</p>
+                <StyledAddToCart id={this.props.id} />
               </div>
             </SingleItemStyles>
           );

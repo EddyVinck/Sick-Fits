@@ -14,7 +14,7 @@ const ADD_TO_CART_MUTATION = gql`
 
 class AddToCart extends Component {
   render() {
-    const { id } = this.props;
+    const { id, className = "" } = this.props;
     return (
       <Mutation
         mutation={ADD_TO_CART_MUTATION}
@@ -24,7 +24,7 @@ class AddToCart extends Component {
         }}
       >
         {(addToCart, { loading }) => (
-          <button onClick={addToCart} disabled={loading}>
+          <button className={className} onClick={addToCart} disabled={loading}>
             Add{loading && "ing"} to cart
           </button>
         )}

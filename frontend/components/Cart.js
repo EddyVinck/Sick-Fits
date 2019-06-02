@@ -5,7 +5,7 @@ import { adopt } from "react-adopt";
 import CartStyles from "./styles/CartStyles";
 import CartTitle from "./styles/CartTitle";
 import CloseButton from "./styles/CloseButton";
-import SickButton from "./styles/SickButton";
+import Button from "./styles/Button";
 import User from "./User";
 import CartItem from "./CartItem";
 import calcTotalPrice from "../lib/calcTotalPrice";
@@ -64,7 +64,7 @@ const Cart = props => {
               <p>{formatMoney(calcTotalPrice(currentUser.cart))}</p>
               {currentUser.cart.length !== 0 && (
                 <TakeMyMoney>
-                  <SickButton>Checkout</SickButton>
+                  <Button>Checkout</Button>
                 </TakeMyMoney>
               )}
             </footer>

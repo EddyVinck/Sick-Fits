@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const ButtonStyles = styled.button`
+const sharedButtonStyles = css`
   background: ${props => props.theme.primaryLight};
   color: white;
   font-weight: 500;
@@ -11,9 +11,17 @@ const ButtonStyles = styled.button`
   padding: 0.8rem 1.5rem;
   display: inline-block;
   transition: all 0.5s;
+  cursor: pointer;
   &[disabled] {
+    cursor: not-allowed;
+    cursor: wait;
     opacity: 0.5;
   }
 `;
 
-export default ButtonStyles;
+const StyledButton = styled.button`
+  ${sharedButtonStyles}
+`;
+
+export default StyledButton;
+export { sharedButtonStyles };
