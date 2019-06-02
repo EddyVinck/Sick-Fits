@@ -94,9 +94,6 @@ const Item = styled.div`
 
       .item__details {
         transition: 0.16s ease-in;
-
-        position: absolute;
-        bottom: 0;
         h3 {
         }
         p {
