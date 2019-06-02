@@ -45,7 +45,7 @@ class Order extends Component {
           return (
             <OrderStyles data-test="order">
               <Head>
-                <title>Sick Fits - Order {order.id}</title>
+                <title>Adamant - Order {order.id}</title>
               </Head>
               <p>
                 <span>Order ID:</span>

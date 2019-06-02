@@ -7,7 +7,7 @@ const Pagination = props => (
   <PaginationStyles data-test="pagination">
     <Head>
       <title>
-        Sick Fits! | Page {props.currentPage} of {props.pagesCount}
+        Adamant | Page {props.currentPage} of {props.pagesCount}
       </title>
     </Head>
     <Link prefetch href={props.prevPage}>
