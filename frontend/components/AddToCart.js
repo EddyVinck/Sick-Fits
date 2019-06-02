@@ -23,11 +23,18 @@ class AddToCart extends Component {
           id
         }}
       >
-        {(addToCart, { loading }) => (
-          <button className={className} onClick={addToCart} disabled={loading}>
-            Add{loading && "ing"} to cart
-          </button>
-        )}
+        {(addToCart, { loading, error }) => {
+          if (error) alert(error) && null;
+          return (
+            <button
+              className={className}
+              onClick={addToCart}
+              disabled={loading}
+            >
+              Add{loading && "ing"} to cart
+            </button>
+          );
+        }}
       </Mutation>
     );
   }

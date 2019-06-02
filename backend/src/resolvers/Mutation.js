@@ -12,6 +12,12 @@ const Mutations = {
     if (!context.request.userId) {
       throw new Error("You must be logged in to do that.");
     }
+    const hasPermissions = context.request.user.permissions.some(permission =>
+      ["ADMIN", "ITEMCREATE"].includes(permission)
+    );
+    if (hasPermissions === false) {
+      throw new Error(`You don't have permission to create items.`);
+    }
 
     const item = await context.db.mutation.createItem(
       {
@@ -32,6 +38,17 @@ const Mutations = {
   },
 
   async updateItem(parent, args, context, info) {
+    if (!context.request.userId) {
+      throw new Error(`You need to be logged in to do this.`);
+    }
+    const isItemOwner = args.id === context.request.userId;
+    const hasPermissions = context.request.user.permissions.some(permission =>
+      ["ADMIN", "ITEMUPDATE"].includes(permission)
+    );
+    if ((isItemOwner || hasPermissions) === false) {
+      throw new Error(`You can't update this item.`);
+    }
+
     // First take a copy of the updates
     const updates = { ...args };
     // Remove the id from the updates
