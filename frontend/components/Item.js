@@ -14,6 +14,11 @@ export default class Item extends Component {
 
   render() {
     const { item } = this.props;
+    const descriptionLength = 60;
+    let description =
+      item.description.length <= descriptionLength
+        ? item.description
+        : item.description.substring(0, descriptionLength) + "...";
     return (
       <ItemStyles>
         <Link
@@ -39,7 +44,7 @@ export default class Item extends Component {
           >
             <a>
               <Title>{item.title}</Title>
-              <p>{item.description}</p>
+              <p>{description}</p>
               <span className="price">{formatMoney(item.price)}</span>
             </a>
           </Link>
