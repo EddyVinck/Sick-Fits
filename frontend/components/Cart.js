@@ -3,7 +3,7 @@ import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { adopt } from "react-adopt";
 import CartStyles from "./styles/CartStyles";
-import Supreme from "./styles/Supreme";
+import CartTitle from "./styles/CartTitle";
 import CloseButton from "./styles/CloseButton";
 import SickButton from "./styles/SickButton";
 import User from "./User";
@@ -49,7 +49,7 @@ const Cart = props => {
               <CloseButton onClick={toggleCart} title="close">
                 &times;
               </CloseButton>
-              <Supreme>{currentUser.name + userNameSuffix} Cart</Supreme>
+              <CartTitle>{currentUser.name + userNameSuffix} Cart</CartTitle>
               <p>
                 You have {currentUser.cart.length} item
                 {currentUser.cart.length === 1 ? "" : "s"} in your cart.

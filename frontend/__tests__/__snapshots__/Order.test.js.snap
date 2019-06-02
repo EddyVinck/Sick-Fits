@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Order /> renders and matches snapshot 1`] = `
-<li
-  className="OrderItemStyles-fbwo89-0 jkaGkx"
+<div
+  className="OrderStyles-sc-4oqalm-0 lhWSxs"
   data-test="order"
 >
   <SideEffect(Head)>
@@ -108,5 +108,5 @@ exports[`<Order /> renders and matches snapshot 1`] = `
       </div>
     </div>
   </div>
-</li>
+</div>
 `;

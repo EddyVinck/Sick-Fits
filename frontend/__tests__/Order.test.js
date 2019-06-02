@@ -4,6 +4,8 @@ import toJSON from "enzyme-to-json";
 import { MockedProvider } from "react-apollo/test-utils";
 import Order, { SINGLE_ORDER_QUERY } from "../components/Order";
 import { fakeOrder } from "../lib/testUtils";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../components/Page";
 
 const order = fakeOrder();
 const mocks = [
@@ -26,14 +28,17 @@ const mocks = [
 describe("<Order />", () => {
   it("renders and matches snapshot", async () => {
     const wrapper = mount(
-      <MockedProvider mocks={mocks}>
-        <Order id={order.id} />
-      </MockedProvider>
+      <ThemeProvider theme={theme}>
+        <MockedProvider mocks={mocks}>
+          <Order id={order.id} />
+        </MockedProvider>
+      </ThemeProvider>
     );
     expect(wrapper.find("p").text()).toMatch(/loading/i);
     await wait();
     wrapper.update();
-    expect(wrapper.find("li[data-test='order']").exists()).toBe(true);
-    expect(toJSON(wrapper.find("li[data-test='order']"))).toMatchSnapshot();
+    console.log(wrapper.debug());
+    expect(wrapper.find("div[data-test='order']").exists()).toBe(true);
+    expect(toJSON(wrapper.find("div[data-test='order']"))).toMatchSnapshot();
   });
 });

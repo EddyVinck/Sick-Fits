@@ -75,6 +75,7 @@ const TopBar = styled(BottomBar)`
 const Logo = styled.h1`
   flex-basis: 100%;
   text-align: center;
+  margin-top: 2.5rem;
   a {
     display: inline-flex;
     font-size: 2.4rem;

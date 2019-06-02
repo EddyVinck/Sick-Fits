@@ -29,7 +29,7 @@ const USER_ORDERS_QUERY = gql`
   }
 `;
 
-const OrderOl = styled.ol`
+const OrdersList = styled.ol`
   display: grid;
   grid-gap: 4rem;
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
@@ -48,7 +48,7 @@ export default class Orders extends Component {
             <div>
               <h1>Orders</h1>
               <p>You have placed {orders.length} orders in the past.</p>
-              <OrderOl>
+              <OrdersList>
                 {orders.map(order => {
                   //
                   return (
@@ -88,7 +88,7 @@ export default class Orders extends Component {
                     </OrderItemStyles>
                   );
                 })}
-              </OrderOl>
+              </OrdersList>
             </div>
           );
         }}

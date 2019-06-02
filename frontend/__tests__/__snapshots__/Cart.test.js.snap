@@ -14,14 +14,14 @@ exports[`<Cart/> renders and matches snapshot 1`] = `
       ×
     </button>
   </CloseButton>
-  <Supreme>
+  <CartTitle>
     <h3
-      className="Supreme-xv30qb-0 hpaXsq"
+      className="CartTitle-sc-1qpm1ti-0 eUPDZO"
     >
       Miss Coleman Berge's
        Cart
     </h3>
-  </Supreme>
+  </CartTitle>
   <p>
     You have 
     1

@@ -58,7 +58,6 @@ class TakeMyMoney extends Component {
               refetchQueries={[{ query: CURRENT_USER_QUERY }]}
             >
               {createOrder => {
-                //
                 return (
                   <StripeCheckout
                     amount={calcTotalPrice(me.cart)}

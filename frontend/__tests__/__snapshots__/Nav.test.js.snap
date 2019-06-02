@@ -20,7 +20,7 @@ exports[`<Nav /> renders a minimal nav when signed out 1`] = `
               className="Nav__LogoMobile-sc-1h4lqeb-3 jqNIvc"
             >
               <h1
-                className="Nav__LogoMobile-sc-1h4lqeb-3 jqNIvc Nav__Logo-sc-1h4lqeb-2 clqaxC"
+                className="Nav__LogoMobile-sc-1h4lqeb-3 jqNIvc Nav__Logo-sc-1h4lqeb-2 gLwLpT"
               >
                 <Link
                   href="/"
@@ -62,7 +62,7 @@ exports[`<Nav /> renders a minimal nav when signed out 1`] = `
               className="Nav__LogoDesktop-sc-1h4lqeb-4 eFuTqq"
             >
               <h1
-                className="Nav__LogoDesktop-sc-1h4lqeb-4 eFuTqq Nav__Logo-sc-1h4lqeb-2 clqaxC"
+                className="Nav__LogoDesktop-sc-1h4lqeb-4 eFuTqq Nav__Logo-sc-1h4lqeb-2 gLwLpT"
               >
                 <Link
                   href="/"
