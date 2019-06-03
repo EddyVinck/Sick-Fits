@@ -30,9 +30,13 @@ const USER_ORDERS_QUERY = gql`
 `;
 
 const OrdersList = styled.ol`
-  display: grid;
-  grid-gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  padding: 0;
+
+  @media (min-width: ${props => props.theme.breakpoints.small}) {
+    display: grid;
+    grid-gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  }
 `;
 
 export default class Orders extends Component {

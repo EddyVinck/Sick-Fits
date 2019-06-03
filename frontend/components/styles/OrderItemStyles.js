@@ -14,16 +14,17 @@ const OrderItemStyles = styled.li`
 
   .images {
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    margin-top: 1rem;
+    grid-gap: 4%;
+    grid-template-columns: repeat(auto-fit, minmax(46%, 1fr));
+    grid-auto-rows: minmax(154px, auto);
     img {
-      height: 200px;
+      height: 120px;
       object-fit: cover;
       width: 100%;
       max-width: 100%;
     }
   }
+
   .order-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
@@ -38,6 +39,18 @@ const OrderItemStyles = styled.li`
     strong {
       display: block;
       margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.medium}) {
+    .images {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+      img {
+        height: 200px;
+      }
     }
   }
 `;
