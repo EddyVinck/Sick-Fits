@@ -16,6 +16,7 @@ const SingleItemStyles = styled.div`
   margin: 2rem auto;
   box-shadow: ${props => props.theme.bs};
   min-height: 600px;
+  padding-bottom: 60px;
 
   img {
     width: 100%;
