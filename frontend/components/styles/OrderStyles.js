@@ -18,6 +18,11 @@ const OrderStyles = styled.div`
         font-weight: 900;
         text-align: right;
       }
+
+      + span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
   .order-item {
