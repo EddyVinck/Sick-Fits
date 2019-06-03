@@ -15,10 +15,7 @@ const SingleItemStyles = styled.div`
   max-width: 1200px;
   margin: 2rem auto;
   box-shadow: ${props => props.theme.bs};
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  min-height: 800px;
+  min-height: 600px;
 
   img {
     width: 100%;
@@ -28,6 +25,13 @@ const SingleItemStyles = styled.div`
   .details {
     margin: 3rem;
     font-size: 2rem;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.small}) {
+    min-height: 800px;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
   }
 `;
 
