@@ -2,7 +2,7 @@
 
 exports[`<Order /> renders and matches snapshot 1`] = `
 <div
-  className="OrderStyles-sc-4oqalm-0 lhWSxs"
+  className="OrderStyles-sc-4oqalm-0 ciubCo"
   data-test="order"
 >
   <SideEffect(Head)>

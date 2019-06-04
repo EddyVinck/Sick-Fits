@@ -4,6 +4,8 @@ import wait from "waait";
 import SingleItem, { SINGLE_ITEM_QUERY } from "../components/SingleItem";
 import { MockedProvider } from "react-apollo/test-utils";
 import { fakeItem } from "../lib/testUtils";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../components/Page";
 
 describe("<SingleItem/>", () => {
   it("renders with proper data", async () => {
@@ -20,9 +22,11 @@ describe("<SingleItem/>", () => {
       }
     ];
     const wrapper = mount(
-      <MockedProvider mocks={mocks}>
-        <SingleItem id="123" />
-      </MockedProvider>
+      <ThemeProvider theme={theme}>
+        <MockedProvider mocks={mocks}>
+          <SingleItem id="123" />
+        </MockedProvider>
+      </ThemeProvider>
     );
     expect(wrapper.text()).toMatch(/loading/i);
     await wait();
